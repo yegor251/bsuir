@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    <entity name="SavedFlight" representedClassName="SavedFlight" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="flightNumber" optional="NO" attributeType="String"/>
+        <attribute name="airline" optional="NO" attributeType="String"/>
+        <attribute name="origin" optional="NO" attributeType="String"/>
+        <attribute name="destination" optional="NO" attributeType="String"/>
+        <attribute name="departureDate" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="arrivalDate" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="price" optional="NO" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="savedDate" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="notes2" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
+        <element name="SavedFlight" positionX="-63" positionY="-18" width="128" height="128"/>
     </elements>
 </model>

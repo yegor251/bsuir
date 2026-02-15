@@ -1,0 +1,50 @@
+"app_name" = "FlightSearchApp";
+"splash_tagline" = "Find the best flights in seconds";
+
+"tab_search" = "Search";
+"tab_saved" = "Saved";
+"tab_settings" = "Settings";
+
+"search_title" = "Flight Search";
+"search_route" = "Route";
+"origin_placeholder" = "Origin (e.g. MOW)";
+"destination_placeholder" = "Destination (e.g. NYC)";
+"departure_date" = "Departure date";
+"passengers_section" = "Passengers";
+"passengers_count" = "%d passengers";
+"search_button" = "Search";
+"search_empty_state" = "Start by entering your route and tapping Search.";
+
+"duration_hours_minutes" = "%d h %d min";
+"duration_minutes" = "%d min";
+
+"details_title" = "Flight details";
+"layovers_title" = "Layovers";
+"layovers_none" = "Direct flight";
+"price_title" = "Price breakdown";
+"price_total" = "Total";
+"notes_title" = "Notes";
+"title_label" = "Name";
+"title_placeholder" = "Name (optional)";
+"notes2_title" = "Notes 2";
+
+"saved_title" = "Saved flights";
+"saved_empty_state" = "You have no saved flights yet.";
+
+"settings_title" = "Settings";
+"settings_language" = "Language";
+"settings_language_picker" = "App language";
+"settings_theme" = "Theme";
+"settings_theme_picker" = "Appearance";
+"settings_about" = "About";
+"settings_version" = "Version";
+
+"theme_system" = "System";
+"theme_light" = "Light";
+"theme_dark" = "Dark";
+
+"error_invalid_input" = "Please enter both origin and destination.";
+"error_no_results" = "No flights found for your route.";
+"error_generic" = "Something went wrong. Please try again.";
+"error_save_failed" = "Could not save this flight.";
+"error_load_saved" = "Could not load saved flights.";

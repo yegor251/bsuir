@@ -1,0 +1,50 @@
+"app_name" = "Поиск рейсов";
+"splash_tagline" = "Находите выгодные перелёты за секунды";
+
+"tab_search" = "Поиск";
+"tab_saved" = "Сохранённые";
+"tab_settings" = "Настройки";
+
+"search_title" = "Поиск рейсов";
+"search_route" = "Маршрут";
+"origin_placeholder" = "Откуда (например, MOW)";
+"destination_placeholder" = "Куда (например, NYC)";
+"departure_date" = "Дата вылета";
+"passengers_section" = "Пассажиры";
+"passengers_count" = "%d пассажиров";
+"search_button" = "Найти рейсы";
+"search_empty_state" = "Введите маршрут и нажмите «Найти рейсы».";
+
+"duration_hours_minutes" = "%d ч %d мин";
+"duration_minutes" = "%d мин";
+
+"details_title" = "Информация о рейсе";
+"layovers_title" = "Пересадки";
+"layovers_none" = "Прямой рейс";
+"price_title" = "Стоимость";
+"price_total" = "Итого";
+"notes_title" = "Заметки";
+"title_label" = "Название";
+"title_placeholder" = "Название (по желанию)";
+"notes2_title" = "Заметки 2";
+
+"saved_title" = "Сохранённые рейсы";
+"saved_empty_state" = "У вас нет сохранённых рейсов.";
+
+"settings_title" = "Настройки";
+"settings_language" = "Язык";
+"settings_language_picker" = "Язык приложения";
+"settings_theme" = "Тема";
+"settings_theme_picker" = "Оформление";
+"settings_about" = "О приложении";
+"settings_version" = "Версия";
+
+"theme_system" = "Системная";
+"theme_light" = "Светлая";
+"theme_dark" = "Тёмная";
+
+"error_invalid_input" = "Укажите пункт вылета и назначения.";
+"error_no_results" = "Рейсы по этому маршруту не найдены.";
+"error_generic" = "Что-то пошло не так. Попробуйте ещё раз.";
+"error_save_failed" = "Не удалось сохранить рейс.";
+"error_load_saved" = "Не удалось загрузить сохранённые рейсы.";
