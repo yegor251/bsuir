@@ -48,3 +48,5 @@
 "error_generic" = "Something went wrong. Please try again.";
 "error_save_failed" = "Could not save this flight.";
 "error_load_saved" = "Could not load saved flights.";
+
+"no_internet_connection" = "No Internet Connection";

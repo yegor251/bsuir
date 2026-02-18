@@ -1,0 +1,45 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="16">
+            <item index="0" class="java.lang.String" itemvalue="Django" />
+            <item index="1" class="java.lang.String" itemvalue="python-dotenv" />
+            <item index="2" class="java.lang.String" itemvalue="django-taggit" />
+            <item index="3" class="java.lang.String" itemvalue="python-telegram-bot" />
+            <item index="4" class="java.lang.String" itemvalue="Pillow" />
+            <item index="5" class="java.lang.String" itemvalue="asyncpg" />
+            <item index="6" class="java.lang.String" itemvalue="typing_extensions" />
+            <item index="7" class="java.lang.String" itemvalue="pip" />
+            <item index="8" class="java.lang.String" itemvalue="pillow" />
+            <item index="9" class="java.lang.String" itemvalue="numpy" />
+            <item index="10" class="java.lang.String" itemvalue="channels" />
+            <item index="11" class="java.lang.String" itemvalue="fastapi" />
+            <item index="12" class="java.lang.String" itemvalue="uvicorn" />
+            <item index="13" class="java.lang.String" itemvalue="pyjwt" />
+            <item index="14" class="java.lang.String" itemvalue="passlib" />
+            <item index="15" class="java.lang.String" itemvalue="flask" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N806" />
+          <option value="N801" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="chat_project.chat_project.urls.django" />
+          <option value="chat_project.chat_project.asgi.django" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

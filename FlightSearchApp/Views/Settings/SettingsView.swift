@@ -13,7 +13,7 @@ struct SettingsView: View {
                         Text("English").tag(AppLanguage.en)
                         Text("Русский").tag(AppLanguage.ru)
                     }
-                    .onChange(of: settingsViewModel.selectedLanguage) { newValue in
+                    .onChange(of: settingsViewModel.selectedLanguage) { oldValue, newValue in
                         settingsViewModel.updateLanguage(newValue)
                     }
                     .onAppear {
@@ -27,7 +27,7 @@ struct SettingsView: View {
                         Text(localizationService.localizedString("theme_light")).tag(AppTheme.light)
                         Text(localizationService.localizedString("theme_dark")).tag(AppTheme.dark)
                     }
-                    .onChange(of: settingsViewModel.selectedTheme) { newValue in
+                    .onChange(of: settingsViewModel.selectedTheme) { oldValue, newValue in
                         settingsViewModel.updateTheme(newValue)
                     }
                 }

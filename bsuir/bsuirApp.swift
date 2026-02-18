@@ -17,6 +17,7 @@ struct FlightSearchApp: App {
 
     @State private var showSplash = true
     @State private var selectedTab = 0
+    @StateObject private var networkMonitor = NetworkMonitor.shared
 
     var body: some Scene {
         WindowGroup {
@@ -33,6 +34,15 @@ struct FlightSearchApp: App {
                         .environmentObject(themeService)
                         .environment(\.locale, localizationService.currentLocale)
                         .preferredColorScheme(themeService.currentColorScheme)
+                }
+
+                if !networkMonitor.isConnected {
+                    VStack(spacing: 0) {
+                        ConnectionBanner()
+                        Spacer()
+                    }
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                    .animation(.easeInOut(duration: 0.3), value: networkMonitor.isConnected)
                 }
             }
             .onAppear {
