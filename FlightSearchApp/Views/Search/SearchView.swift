@@ -54,7 +54,7 @@ struct SearchView: View {
                 if !viewModel.flights.isEmpty {
                     List(viewModel.flights) { flight in
                         NavigationLink {
-                            FlightDetailsView(viewModel: FlightDetailsViewModel(flight: flight))
+                            FlightDetailsView(flight: flight)
                         } label: {
                             FlightRowView(flight: flight) {
                                 viewModel.saveFlight(flight)

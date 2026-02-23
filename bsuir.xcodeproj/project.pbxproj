@@ -28,6 +28,7 @@
 		FA1841472F3F40C000961D7A /* SavedFlightsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1841252F3F40C000961D7A /* SavedFlightsViewModel.swift */; };
 		FA1841482F3F40C000961D7A /* SavedFlightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18412B2F3F40C000961D7A /* SavedFlightsView.swift */; };
 		FA1841492F3F40C000961D7A /* flights.json in Resources */ = {isa = PBXBuildFile; fileRef = FA18414A2F3F40C000961D7A /* flights.json */; };
+		FA1EDF142F472BCF00917376 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1EDF132F472BCF00917376 /* WeatherService.swift */; };
 		FACBC4532F45F3D50078DE6D /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACBC4522F45F3D50078DE6D /* NetworkMonitor.swift */; };
 		FACBC45B2F45F6000078DE6D /* ConnectionBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACBC4592F45F6000078DE6D /* ConnectionBanner.swift */; };
 /* End PBXBuildFile section */
@@ -55,6 +56,7 @@
 		FA18412D2F3F40C000961D7A /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		FA18412F2F3F40C000961D7A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FA18414A2F3F40C000961D7A /* flights.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = flights.json; sourceTree = "<group>"; };
+		FA1EDF132F472BCF00917376 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		FACBC4522F45F3D50078DE6D /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		FACBC4592F45F6000078DE6D /* ConnectionBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionBanner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +129,7 @@
 		FA1841232F3F40C000961D7A /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				FA1EDF132F472BCF00917376 /* WeatherService.swift */,
 				FACBC4522F45F3D50078DE6D /* NetworkMonitor.swift */,
 				FA18411E2F3F40C000961D7A /* DatabaseService.swift */,
 				FA18411F2F3F40C000961D7A /* LocalizationService.swift */,
@@ -304,6 +307,7 @@
 				FA1841412F3F40C000961D7A /* SettingsManager.swift in Sources */,
 				FACBC4532F45F3D50078DE6D /* NetworkMonitor.swift in Sources */,
 				FA1841422F3F40C000961D7A /* FlightDetailsViewModel.swift in Sources */,
+				FA1EDF142F472BCF00917376 /* WeatherService.swift in Sources */,
 				FA1841432F3F40C000961D7A /* MockFlightService.swift in Sources */,
 				FA1841442F3F40C000961D7A /* DatabaseService.swift in Sources */,
 				FA1841452F3F40C000961D7A /* SearchViewModel.swift in Sources */,

@@ -2,9 +2,20 @@ import SwiftUI
 
 struct FlightDetailsView: View {
     @EnvironmentObject private var localizationService: LocalizationService
-    @ObservedObject var viewModel: FlightDetailsViewModel
+    @StateObject private var viewModel: FlightDetailsViewModel
+        
+    init(flight: Flight, isSaved: Bool = false, notes: String = "", title: String = "", notes2: String = "") {
+        _viewModel = StateObject(wrappedValue: FlightDetailsViewModel(
+            flight: flight,
+            isSaved: isSaved,
+            notes: notes,
+            title: title,
+            notes2: notes2
+        ))
+    }
 
     @State private var sharing: Bool = false
+    @State private var weatherViewId = UUID()
 
     var body: some View {
         ScrollView {
@@ -14,11 +25,23 @@ struct FlightDetailsView: View {
                 routeVisualization
                 layoverSection
                 priceSection
+                weatherSection
+                    .id(weatherViewId)
                 notesSection
                 notes2Section
                 Spacer(minLength: 16)
             }
             .padding()
+        }
+        .onAppear {
+            print("FlightDetailsView onAppear, flight destination=\(viewModel.flight.destination)")
+            Task {
+                await viewModel.loadWeather()
+            }
+        }
+        .onChange(of: viewModel.temperature) { oldValue, newValue in
+            print("FlightDetailsView weatherSection reload, old=\(String(describing: oldValue)), new=\(String(describing: newValue))")
+            weatherViewId = UUID()
         }
         .onDisappear {
             viewModel.saveUpdates()
@@ -112,6 +135,42 @@ struct FlightDetailsView: View {
                 }
             }
         }
+    }
+
+    private var weatherSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Image(systemName: "thermometer.medium")
+                Text(localizationService.localizedString("weather_title"))
+                    .font(.headline)
+            }
+
+            if let temperature = viewModel.temperature {
+                Text(String(format: "%.0f°C", temperature))
+                    .font(.title3.bold())
+            } else {
+                switch viewModel.weatherState {
+                case .loading:
+                    HStack(spacing: 8) {
+                        ProgressView()
+                        Text(localizationService.localizedString("weather_loading"))
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                case .offline:
+                    Text(localizationService.localizedString("weather_offline_unavailable"))
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                case .loaded, .error:
+                    Text(localizationService.localizedString("weather_error"))
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+        .padding()
+        .background(.thinMaterial)
+        .cornerRadius(12)
     }
 
     private var priceSection: some View {
@@ -215,17 +274,15 @@ struct ActivityView: UIViewControllerRepresentable {
 
 #Preview {
     FlightDetailsView(
-        viewModel: FlightDetailsViewModel(
-            flight: Flight(
-                airline: "Swift Air",
-                flightNumber: "SA123",
-                origin: "MOW",
-                destination: "NYC",
-                departureDate: Date(),
-                arrivalDate: Date().addingTimeInterval(3 * 3600),
-                durationMinutes: 180,
-                price: 15000
-            )
+        flight: Flight(
+            airline: "Swift Air",
+            flightNumber: "SA123",
+            origin: "MOW",
+            destination: "NYC",
+            departureDate: Date(),
+            arrivalDate: Date().addingTimeInterval(3 * 3600),
+            durationMinutes: 180,
+            price: 15000
         )
     )
     .environmentObject(LocalizationService.shared)

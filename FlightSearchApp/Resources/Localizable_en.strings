@@ -28,6 +28,11 @@
 "title_placeholder" = "Name (optional)";
 "notes2_title" = "Notes 2";
 
+"weather_title" = "Weather";
+"weather_offline_unavailable" = "Weather unavailable offline";
+"weather_loading" = "Loading weather...";
+"weather_error" = "Unable to load weather";
+
 "saved_title" = "Saved flights";
 "saved_empty_state" = "You have no saved flights yet.";
 

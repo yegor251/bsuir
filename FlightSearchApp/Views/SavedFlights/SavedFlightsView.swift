@@ -39,13 +39,11 @@ struct SavedFlightsView: View {
                                     price: flight.price
                                 )
                                 FlightDetailsView(
-                                    viewModel: FlightDetailsViewModel(
-                                        flight: flightModel,
-                                        isSaved: true,
-                                        notes: flight.notes ?? "",
-                                        title: flight.title ?? "",
-                                        notes2: flight.notes2 ?? ""
-                                    )
+                                    flight: flightModel,
+                                    isSaved: true,
+                                    notes: flight.notes ?? "",
+                                    title: flight.title ?? "",
+                                    notes2: flight.notes2 ?? ""
                                 )
                             } label: {
                                 SavedFlightRowView(flight: flight)

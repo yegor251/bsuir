@@ -28,6 +28,11 @@
 "title_placeholder" = "Название (по желанию)";
 "notes2_title" = "Заметки 2";
 
+"weather_title" = "Погода";
+"weather_offline_unavailable" = "Погода недоступна офлайн";
+"weather_loading" = "Загрузка погоды...";
+"weather_error" = "Не удалось загрузить погоду";
+
 "saved_title" = "Сохранённые рейсы";
 "saved_empty_state" = "У вас нет сохранённых рейсов.";
 
