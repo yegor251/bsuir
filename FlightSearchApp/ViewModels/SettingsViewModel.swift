@@ -10,6 +10,7 @@ final class SettingsViewModel: ObservableObject {
     init() {
         self.selectedLanguage = LocalizationService.shared.language
         self.selectedTheme = settingsManager.loadTheme()
+        NotificationService.shared.isEnabled = UserDefaults.standard.bool(forKey: "notificationsEnabled")
     }
 
     func updateLanguage(_ language: AppLanguage) {

@@ -31,6 +31,7 @@
 		FA1EDF142F472BCF00917376 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1EDF132F472BCF00917376 /* WeatherService.swift */; };
 		FACBC4532F45F3D50078DE6D /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACBC4522F45F3D50078DE6D /* NetworkMonitor.swift */; };
 		FACBC45B2F45F6000078DE6D /* ConnectionBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACBC4592F45F6000078DE6D /* ConnectionBanner.swift */; };
+		FA18414B2F3F40C000961D7A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18414C2F3F40C000961D7A /* NotificationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		FA1EDF132F472BCF00917376 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		FACBC4522F45F3D50078DE6D /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		FACBC4592F45F6000078DE6D /* ConnectionBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionBanner.swift; sourceTree = "<group>"; };
+		FA18414C2F3F40C000961D7A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -131,6 +133,7 @@
 			children = (
 				FA1EDF132F472BCF00917376 /* WeatherService.swift */,
 				FACBC4522F45F3D50078DE6D /* NetworkMonitor.swift */,
+				FA18414C2F3F40C000961D7A /* NotificationService.swift */,
 				FA18411E2F3F40C000961D7A /* DatabaseService.swift */,
 				FA18411F2F3F40C000961D7A /* LocalizationService.swift */,
 				FA1841202F3F40C000961D7A /* MockFlightService.swift */,
@@ -315,6 +318,7 @@
 				FA1841472F3F40C000961D7A /* SavedFlightsViewModel.swift in Sources */,
 				FA1841482F3F40C000961D7A /* SavedFlightsView.swift in Sources */,
 				FACBC45B2F45F6000078DE6D /* ConnectionBanner.swift in Sources */,
+				FA18414B2F3F40C000961D7A /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +457,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_NSUserNotificationsUsageDescription = "Get reminders about your saved flights";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -484,6 +489,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_NSUserNotificationsUsageDescription = "Get reminders about your saved flights";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -35,8 +35,19 @@
 
 "saved_title" = "Сохранённые рейсы";
 "saved_empty_state" = "У вас нет сохранённых рейсов.";
+"saved_search_prompt" = "Поиск рейсов...";
+"saved_sort_label" = "Сортировка";
+"saved_sort_date_added" = "Дата добавления";
+"saved_sort_price" = "Цена";
+"saved_sort_departure_date" = "Дата вылета";
+"saved_sort_airline" = "Авиакомпания";
+"saved_destination_filter_placeholder" = "Фильтр по пункту назначения";
 
 "settings_title" = "Настройки";
+"settings_notifications_section" = "Уведомления";
+"settings_notifications_flight_reminders" = "Напоминания о рейсах";
+"settings_notifications_flight_reminders_description" = "Получайте уведомления о сохранённых рейсах каждую минуту";
+
 "settings_language" = "Язык";
 "settings_language_picker" = "Язык приложения";
 "settings_theme" = "Тема";

@@ -14,7 +14,7 @@ struct SavedFlightsView: View {
                     Text(message)
                         .foregroundColor(.secondary)
                         .padding()
-                } else if viewModel.flights.isEmpty {
+                } else if viewModel.filteredFlights.isEmpty {
                     VStack(spacing: 12) {
                         Image(systemName: "bookmark.slash")
                             .font(.system(size: 40))
@@ -25,7 +25,15 @@ struct SavedFlightsView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
                     List {
-                        ForEach(viewModel.flights) { flight in
+                        Section {
+                            TextField(
+                                localizationService.localizedString("saved_destination_filter_placeholder"),
+                                text: $viewModel.destinationFilter
+                            )
+                            .textInputAutocapitalization(.characters)
+                        }
+
+                        ForEach(viewModel.filteredFlights) { flight in
                             NavigationLink {
                                 let flightModel = Flight(
                                     id: flight.id,
@@ -57,6 +65,27 @@ struct SavedFlightsView: View {
                 }
             }
             .navigationTitle(localizationService.localizedString("saved_title"))
+            .searchable(text: $viewModel.searchText, prompt: localizationService.localizedString("saved_search_prompt"))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        ForEach(SavedFlightsSortOption.allCases, id: \.self) { option in
+                            Button(action: {
+                                viewModel.sortOption = option
+                            }) {
+                                HStack {
+                                    Text(localizationService.localizedString(option.localizationKey))
+                                    if viewModel.sortOption == option {
+                                        Image(systemName: "checkmark")
+                                    }
+                                }
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                    }
+                }
+            }
             .onAppear {
                 viewModel.load()
             }

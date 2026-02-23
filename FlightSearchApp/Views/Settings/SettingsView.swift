@@ -4,10 +4,31 @@ struct SettingsView: View {
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
     @EnvironmentObject private var localizationService: LocalizationService
     @EnvironmentObject private var themeService: ThemeService
+    @ObservedObject private var notificationService = NotificationService.shared
 
     var body: some View {
         NavigationStack {
             Form {
+                Section(header: Text(localizationService.localizedString("settings_notifications_section"))) {
+                    Toggle(localizationService.localizedString("settings_notifications_flight_reminders"), isOn: $notificationService.isEnabled)
+                        .onChange(of: notificationService.isEnabled) { _, enabled in
+                            if enabled {
+                                notificationService.requestPermission { granted in
+                                    if granted {
+                                        notificationService.loadFlightsAndStart()
+                                    } else {
+                                        notificationService.isEnabled = false
+                                    }
+                                }
+                            } else {
+                                notificationService.stopNotifications()
+                            }
+                        }
+                    Text(localizationService.localizedString("settings_notifications_flight_reminders_description"))
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+
                 Section(header: Text(localizationService.localizedString("settings_language"))) {
                     Picker(localizationService.localizedString("settings_language_picker"), selection: $settingsViewModel.selectedLanguage) {
                         Text("English").tag(AppLanguage.en)
@@ -42,6 +63,14 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle(localizationService.localizedString("settings_title"))
+            .onAppear {
+                if notificationService.isEnabled {
+                    let flights = (try? DatabaseService.shared.fetchSavedFlights()) ?? []
+                    if !flights.isEmpty {
+                        notificationService.startPeriodicNotifications(flights: flights)
+                    }
+                }
+            }
         }
     }
 }

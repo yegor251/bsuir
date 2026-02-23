@@ -35,8 +35,18 @@
 
 "saved_title" = "Saved flights";
 "saved_empty_state" = "You have no saved flights yet.";
+"saved_search_prompt" = "Search flights...";
+"saved_sort_label" = "Sort";
+"saved_sort_date_added" = "Date Added";
+"saved_sort_price" = "Price";
+"saved_sort_departure_date" = "Departure Date";
+"saved_sort_airline" = "Airline";
+"saved_destination_filter_placeholder" = "Filter by destination";
 
 "settings_title" = "Settings";
+"settings_notifications_section" = "Notifications";
+"settings_notifications_flight_reminders" = "Flight Reminders";
+"settings_notifications_flight_reminders_description" = "Get notified about your saved flights every minute";
 "settings_language" = "Language";
 "settings_language_picker" = "App language";
 "settings_theme" = "Theme";
