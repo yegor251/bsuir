@@ -14,6 +14,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
+        ImageKit.init(
+            publicKey: "public_BVbz9sMCEkkkq64cfk22TCaBTOE=",
+            urlEndpoint: "https://ik.imagekit.io/2vrqg0cnj",
+            transformationPosition: TransformationPosition.PATH
+        )
         return true
     }
 }

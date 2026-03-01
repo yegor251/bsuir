@@ -46,9 +46,31 @@ struct SearchView: View {
                 }
 
                 if let message = viewModel.errorMessage, viewModel.flights.isEmpty {
-                    Text(message)
-                        .foregroundColor(.secondary)
-                        .padding()
+                    VStack(spacing: 16) {
+                        AsyncImage(url: URL(string: "https://ik.imagekit.io/2vrqg0cnj/sad_smiley.png")) { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 100, height: 100)
+                            case .failure:
+                                Image(systemName: "exclamationmark.triangle")
+                                    .font(.system(size: 50))
+                                    .foregroundColor(.gray)
+                            @unknown default:
+                                EmptyView()
+                            }
+                        }
+                        
+                        Text(message)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
+                    }
+                    .padding()
                 }
 
                 if !viewModel.flights.isEmpty {
@@ -62,7 +84,7 @@ struct SearchView: View {
                         }
                     }
                     .listStyle(.plain)
-                } else if !viewModel.isLoading {
+                } else if !viewModel.isLoading && viewModel.errorMessage == nil {
                     Spacer()
                     Text(localizationService.localizedString("search_empty_state"))
                         .foregroundColor(.secondary)
