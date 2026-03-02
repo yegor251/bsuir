@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import FirebaseFirestore
 
 final class FlightDetailsViewModel: ObservableObject {
     @Published var flight: Flight
@@ -51,7 +52,7 @@ final class FlightDetailsViewModel: ObservableObject {
         guard isSaved else { return }
         try? databaseService.updateSavedFlight(id: flight.id, notes: notes.isEmpty ? nil : notes, title: title.isEmpty ? nil : title, notes2: notes2.isEmpty ? nil : notes2)
     }
-
+    
     func loadWeather() async {
         print("FlightDetailsViewModel.loadWeather start, destination=\(flight.destination)")
         weatherState = .loading
@@ -63,9 +64,43 @@ final class FlightDetailsViewModel: ObservableObject {
             weatherState = temperatureResult != nil ? .loaded : .error
         }
     }
-
+    
     private func save() {
-        try? databaseService.saveFlight(flight, notes: notes.isEmpty ? nil : notes, title: title.isEmpty ? nil : title, notes2: notes2.isEmpty ? nil : notes2)
+        do {
+            try databaseService.saveFlight(flight, notes: notes.isEmpty ? nil : notes, title: title.isEmpty ? nil : title, notes2: notes2.isEmpty ? nil : notes2)
+            
+            syncToFirebase()
+        } catch {
+            print("Ошибка локального сохранения: \(error)")
+        }
+    }
+    
+    private func syncToFirebase() {
+        let db = Firestore.firestore()
+        let docId = flight.id.uuidString
+        
+        let flightData: [String: Any] = [
+            "id": flight.id,
+            "airline": flight.airline,
+            "arrivalDate": flight.arrivalDate,
+            "departureDate": flight.departureDate,
+            "destination": flight.destination,
+            "flightNumber": flight.flightNumber,
+            "notes": notes,
+            "notes2": notes2,
+            "origin": flight.origin,
+            "price": flight.price,
+            "title": title,
+            "lastUpdated": FieldValue.serverTimestamp()
+        ]
+        
+        db.collection("saved_flights").document(docId).setData(flightData, merge: true) { error in
+            if let error = error {
+                print("Ошибка синхронизации с Firebase: \(error.localizedDescription)")
+            } else {
+                print("Рейс успешно синхронизирован с Firebase")
+            }
+        }
     }
 
     private func delete() {

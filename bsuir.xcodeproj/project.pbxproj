@@ -28,10 +28,19 @@
 		FA1841472F3F40C000961D7A /* SavedFlightsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1841252F3F40C000961D7A /* SavedFlightsViewModel.swift */; };
 		FA1841482F3F40C000961D7A /* SavedFlightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18412B2F3F40C000961D7A /* SavedFlightsView.swift */; };
 		FA1841492F3F40C000961D7A /* flights.json in Resources */ = {isa = PBXBuildFile; fileRef = FA18414A2F3F40C000961D7A /* flights.json */; };
+		FA18414B2F3F40C000961D7A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18414C2F3F40C000961D7A /* NotificationService.swift */; };
 		FA1EDF142F472BCF00917376 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1EDF132F472BCF00917376 /* WeatherService.swift */; };
 		FACBC4532F45F3D50078DE6D /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACBC4522F45F3D50078DE6D /* NetworkMonitor.swift */; };
 		FACBC45B2F45F6000078DE6D /* ConnectionBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACBC4592F45F6000078DE6D /* ConnectionBanner.swift */; };
-		FA18414B2F3F40C000961D7A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18414C2F3F40C000961D7A /* NotificationService.swift */; };
+		FCC2CDC92F54ADC20019E2C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC2CDC22F54ADC20019E2C9 /* Assets.xcassets */; };
+		FCC2CDCA2F54ADC20019E2C9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCC2CDC52F54ADC20019E2C9 /* GoogleService-Info.plist */; };
+		FCC2CDCB2F54ADC20019E2C9 /* bsuir.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FCC2CDC32F54ADC20019E2C9 /* bsuir.xcdatamodeld */; };
+		FCC2CDCC2F54ADC20019E2C9 /* bsuirApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2CDC42F54ADC20019E2C9 /* bsuirApp.swift */; };
+		FCC2CDCD2F54ADC20019E2C9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2CDC62F54ADC20019E2C9 /* Persistence.swift */; };
+		FCC2CDD02F54AE5E0019E2C9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FCC2CDCF2F54AE5E0019E2C9 /* FirebaseAuth */; };
+		FCC2CDD22F54AE680019E2C9 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = FCC2CDD12F54AE680019E2C9 /* FirebaseCore */; };
+		FCC2CDD42F54AE710019E2C9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FCC2CDD32F54AE710019E2C9 /* FirebaseFirestore */; };
+		FCFE285D2F54986C00A678FE /* ImageKitIO in Frameworks */ = {isa = PBXBuildFile; productRef = FCFE285C2F54986C00A678FE /* ImageKitIO */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,25 +66,26 @@
 		FA18412D2F3F40C000961D7A /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		FA18412F2F3F40C000961D7A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FA18414A2F3F40C000961D7A /* flights.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = flights.json; sourceTree = "<group>"; };
+		FA18414C2F3F40C000961D7A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		FA1EDF132F472BCF00917376 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		FACBC4522F45F3D50078DE6D /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		FACBC4592F45F6000078DE6D /* ConnectionBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionBanner.swift; sourceTree = "<group>"; };
-		FA18414C2F3F40C000961D7A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		FCC2CDC22F54ADC20019E2C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FCC2CDC42F54ADC20019E2C9 /* bsuirApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bsuirApp.swift; sourceTree = "<group>"; };
+		FCC2CDC52F54ADC20019E2C9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FCC2CDC62F54ADC20019E2C9 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		FCC2CDC82F54ADC20019E2C9 /* bsuir.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = bsuir.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		FA1840C52F3F3C3D00961D7A /* bsuir */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = bsuir;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		FA1840C02F3F3C3D00961D7A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCFE285D2F54986C00A678FE /* ImageKitIO in Frameworks */,
+				FCC2CDD42F54AE710019E2C9 /* FirebaseFirestore in Frameworks */,
+				FCC2CDD22F54AE680019E2C9 /* FirebaseCore in Frameworks */,
+				FCC2CDD02F54AE5E0019E2C9 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				FA1841332F3F40C000961D7A /* FlightSearchApp */,
-				FA1840C52F3F3C3D00961D7A /* bsuir */,
+				FCC2CDC72F54ADC20019E2C9 /* bsuir */,
+				FCC2CDCE2F54AE5E0019E2C9 /* Frameworks */,
 				FA1840C42F3F3C3D00961D7A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -219,6 +230,25 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		FCC2CDC72F54ADC20019E2C9 /* bsuir */ = {
+			isa = PBXGroup;
+			children = (
+				FCC2CDC22F54ADC20019E2C9 /* Assets.xcassets */,
+				FCC2CDC32F54ADC20019E2C9 /* bsuir.xcdatamodeld */,
+				FCC2CDC42F54ADC20019E2C9 /* bsuirApp.swift */,
+				FCC2CDC52F54ADC20019E2C9 /* GoogleService-Info.plist */,
+				FCC2CDC62F54ADC20019E2C9 /* Persistence.swift */,
+			);
+			path = bsuir;
+			sourceTree = "<group>";
+		};
+		FCC2CDCE2F54AE5E0019E2C9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -234,11 +264,12 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				FA1840C52F3F3C3D00961D7A /* bsuir */,
-			);
 			name = bsuir;
 			packageProductDependencies = (
+				FCFE285C2F54986C00A678FE /* ImageKitIO */,
+				FCC2CDCF2F54AE5E0019E2C9 /* FirebaseAuth */,
+				FCC2CDD12F54AE680019E2C9 /* FirebaseCore */,
+				FCC2CDD32F54AE710019E2C9 /* FirebaseFirestore */,
 			);
 			productName = bsuir;
 			productReference = FA1840C32F3F3C3D00961D7A /* bsuir.app */;
@@ -269,6 +300,10 @@
 			);
 			mainGroup = FA1840BA2F3F3C3D00961D7A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				FCFE285B2F54986C00A678FE /* XCRemoteSwiftPackageReference "imagekit-ios" */,
+				FCC2CDBD2F54A4A00019E2C9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FA1840C42F3F3C3D00961D7A /* Products */;
 			projectDirPath = "";
@@ -287,6 +322,8 @@
 				FA1841342F3F40C000961D7A /* Localizable_en.strings in Resources */,
 				FA1841352F3F40C000961D7A /* Localizable_ru.strings in Resources */,
 				FA1841492F3F40C000961D7A /* flights.json in Resources */,
+				FCC2CDC92F54ADC20019E2C9 /* Assets.xcassets in Resources */,
+				FCC2CDCA2F54ADC20019E2C9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +334,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCC2CDCB2F54ADC20019E2C9 /* bsuir.xcdatamodeld in Sources */,
+				FCC2CDCC2F54ADC20019E2C9 /* bsuirApp.swift in Sources */,
+				FCC2CDCD2F54ADC20019E2C9 /* Persistence.swift in Sources */,
 				FA1841372F3F40C000961D7A /* SearchView.swift in Sources */,
 				FA1841382F3F40C000961D7A /* SearchQuery.swift in Sources */,
 				FA1841392F3F40C000961D7A /* SavedFlightModel.swift in Sources */,
@@ -453,11 +493,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSUserNotificationsUsageDescription = "Get reminders about your saved flights";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_NSUserNotificationsUsageDescription = "Get reminders about your saved flights";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -485,11 +525,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSUserNotificationsUsageDescription = "Get reminders about your saved flights";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_NSUserNotificationsUsageDescription = "Get reminders about your saved flights";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -530,6 +570,61 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FCC2CDBD2F54A4A00019E2C9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.10.0;
+			};
+		};
+		FCFE285B2F54986C00A678FE /* XCRemoteSwiftPackageReference "imagekit-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/imagekit-developer/imagekit-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FCC2CDCF2F54AE5E0019E2C9 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FCC2CDBD2F54A4A00019E2C9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		FCC2CDD12F54AE680019E2C9 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FCC2CDBD2F54A4A00019E2C9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		FCC2CDD32F54AE710019E2C9 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FCC2CDBD2F54A4A00019E2C9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		FCFE285C2F54986C00A678FE /* ImageKitIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FCFE285B2F54986C00A678FE /* XCRemoteSwiftPackageReference "imagekit-ios" */;
+			productName = ImageKitIO;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		FCC2CDC32F54ADC20019E2C9 /* bsuir.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FCC2CDC82F54ADC20019E2C9 /* bsuir.xcdatamodel */,
+			);
+			currentVersion = FCC2CDC82F54ADC20019E2C9 /* bsuir.xcdatamodel */;
+			path = bsuir.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FA1840BB2F3F3C3D00961D7A /* Project object */;
 }

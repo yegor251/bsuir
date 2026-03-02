@@ -7,9 +7,26 @@
 
 import SwiftUI
 import CoreData
+import FirebaseCore
+import ImageKitIO
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        ImageKit.init(
+            publicKey: "public_BVbz9sMCEkkkq64cfk22TCaBTOE=",
+            urlEndpoint: "https://ik.imagekit.io/2vrqg0cnj",
+            transformationPosition: TransformationPosition.PATH
+        )
+        return true
+    }
+}
 
 @main
 struct FlightSearchApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     private let persistenceController = PersistenceController.shared
     @StateObject private var settingsViewModel = SettingsViewModel()
     @ObservedObject private var localizationService = LocalizationService.shared
