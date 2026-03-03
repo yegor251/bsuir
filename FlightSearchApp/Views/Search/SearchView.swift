@@ -47,7 +47,7 @@ struct SearchView: View {
 
                 if let message = viewModel.errorMessage, viewModel.flights.isEmpty {
                     VStack(spacing: 16) {
-                        AsyncImage(url: URL(string: "https://ik.imagekit.io/2vrqg0cnj/sad_smiley.png")) { phase in
+                        AsyncImage(url: URL(string: "https://ik.imagekit.io/pb0e83twy8/smile.png")) { phase in
                             switch phase {
                             case .empty:
                                 ProgressView()

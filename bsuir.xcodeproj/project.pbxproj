@@ -30,10 +30,10 @@
 		FA1841492F3F40C000961D7A /* flights.json in Resources */ = {isa = PBXBuildFile; fileRef = FA18414A2F3F40C000961D7A /* flights.json */; };
 		FA18414B2F3F40C000961D7A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18414C2F3F40C000961D7A /* NotificationService.swift */; };
 		FA1EDF142F472BCF00917376 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1EDF132F472BCF00917376 /* WeatherService.swift */; };
+		FA7A49032F56E60B008039ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA7A49022F56E60B008039ED /* GoogleService-Info.plist */; };
 		FACBC4532F45F3D50078DE6D /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACBC4522F45F3D50078DE6D /* NetworkMonitor.swift */; };
 		FACBC45B2F45F6000078DE6D /* ConnectionBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACBC4592F45F6000078DE6D /* ConnectionBanner.swift */; };
 		FCC2CDC92F54ADC20019E2C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC2CDC22F54ADC20019E2C9 /* Assets.xcassets */; };
-		FCC2CDCA2F54ADC20019E2C9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCC2CDC52F54ADC20019E2C9 /* GoogleService-Info.plist */; };
 		FCC2CDCB2F54ADC20019E2C9 /* bsuir.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FCC2CDC32F54ADC20019E2C9 /* bsuir.xcdatamodeld */; };
 		FCC2CDCC2F54ADC20019E2C9 /* bsuirApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2CDC42F54ADC20019E2C9 /* bsuirApp.swift */; };
 		FCC2CDCD2F54ADC20019E2C9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2CDC62F54ADC20019E2C9 /* Persistence.swift */; };
@@ -68,11 +68,11 @@
 		FA18414A2F3F40C000961D7A /* flights.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = flights.json; sourceTree = "<group>"; };
 		FA18414C2F3F40C000961D7A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		FA1EDF132F472BCF00917376 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		FA7A49022F56E60B008039ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FACBC4522F45F3D50078DE6D /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		FACBC4592F45F6000078DE6D /* ConnectionBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionBanner.swift; sourceTree = "<group>"; };
 		FCC2CDC22F54ADC20019E2C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCC2CDC42F54ADC20019E2C9 /* bsuirApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bsuirApp.swift; sourceTree = "<group>"; };
-		FCC2CDC52F54ADC20019E2C9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FCC2CDC62F54ADC20019E2C9 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		FCC2CDC82F54ADC20019E2C9 /* bsuir.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = bsuir.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -233,10 +233,10 @@
 		FCC2CDC72F54ADC20019E2C9 /* bsuir */ = {
 			isa = PBXGroup;
 			children = (
+				FA7A49022F56E60B008039ED /* GoogleService-Info.plist */,
 				FCC2CDC22F54ADC20019E2C9 /* Assets.xcassets */,
 				FCC2CDC32F54ADC20019E2C9 /* bsuir.xcdatamodeld */,
 				FCC2CDC42F54ADC20019E2C9 /* bsuirApp.swift */,
-				FCC2CDC52F54ADC20019E2C9 /* GoogleService-Info.plist */,
 				FCC2CDC62F54ADC20019E2C9 /* Persistence.swift */,
 			);
 			path = bsuir;
@@ -321,9 +321,9 @@
 			files = (
 				FA1841342F3F40C000961D7A /* Localizable_en.strings in Resources */,
 				FA1841352F3F40C000961D7A /* Localizable_ru.strings in Resources */,
+				FA7A49032F56E60B008039ED /* GoogleService-Info.plist in Resources */,
 				FA1841492F3F40C000961D7A /* flights.json in Resources */,
 				FCC2CDC92F54ADC20019E2C9 /* Assets.xcassets in Resources */,
-				FCC2CDCA2F54ADC20019E2C9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

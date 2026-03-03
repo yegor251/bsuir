@@ -80,7 +80,7 @@ final class FlightDetailsViewModel: ObservableObject {
         let docId = flight.id.uuidString
         
         let flightData: [String: Any] = [
-            "id": flight.id,
+            "id": flight.id.uuidString,
             "airline": flight.airline,
             "arrivalDate": flight.arrivalDate,
             "departureDate": flight.departureDate,
