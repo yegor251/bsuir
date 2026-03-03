@@ -1,92 +1,176 @@
 import Foundation
+import UIKit
 import Combine
 import UserNotifications
 
-final class NotificationService: ObservableObject {
+final class NotificationService: NSObject, ObservableObject {
     static let shared = NotificationService()
-
-    @Published var isEnabled: Bool = false {
-        didSet {
-            UserDefaults.standard.set(isEnabled, forKey: Self.notificationsEnabledKey)
-        }
+    
+    // MARK: - Published State
+    
+    @Published var isEnabled: Bool = false
+    @Published private(set) var isAuthorized: Bool = false
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    private override init() {
+        super.init()
+        UNUserNotificationCenter.current().delegate = self
+        
+        // Проверяем статус при старте
+        refreshAuthorizationStatus()
+        
+        // Отслеживаем возврат из Settings
+        NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
+            .sink { [weak self] _ in
+                self?.refreshAuthorizationStatus()
+            }
+            .store(in: &cancellables)
     }
-
-    private static let notificationsEnabledKey = "notificationsEnabled"
-    private var timer: Timer?
-    private var currentFlights: [SavedFlightModel] = []
-
-    private init() {
-        isEnabled = UserDefaults.standard.bool(forKey: Self.notificationsEnabledKey)
-    }
-
-    func requestPermission(completion: ((Bool) -> Void)? = nil) {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, _ in
+    
+    // MARK: - Authorization
+    
+    func requestAuthorization() {
+        let options: UNAuthorizationOptions = [.alert, .sound, .badge]
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: options) { [weak self] granted, error in
+            
+            if let error = error {
+                print("❗ Notification permission error:", error.localizedDescription)
+            }
+            
             DispatchQueue.main.async {
-                completion?(granted)
+                self?.isAuthorized = granted
             }
         }
     }
-
+    
+    func refreshAuthorizationStatus() {
+        UNUserNotificationCenter.current().getNotificationSettings { [weak self] settings in
+            
+            DispatchQueue.main.async {
+                self?.isAuthorized = settings.authorizationStatus == .authorized ||
+                settings.authorizationStatus == .provisional
+            }
+        }
+    }
+    
+    // MARK: - Permission
+    
+    /// Запрос разрешения на уведомления
+    func requestAuthorization(completion: @escaping (Bool) -> Void) {
+        let options: UNAuthorizationOptions = [.alert, .sound, .badge]
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: options) { granted, error in
+            if let error = error {
+                print("❗ Notification permission error:", error.localizedDescription)
+            }
+            
+            DispatchQueue.main.async {
+                completion(granted)
+            }
+        }
+    }
+    
+    /// Проверка текущего статуса разрешения
+    func getAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                completion(settings.authorizationStatus)
+            }
+        }
+    }
+    
+    // MARK: - Schedule Repeating Notification
+    
     func loadFlightsAndStart() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
             do {
                 let flights = try DatabaseService.shared.fetchSavedFlights()
                 DispatchQueue.main.async {
-                    self.startPeriodicNotifications(flights: flights)
+                    self.startRepeatingNotification(from: flights)
                 }
             } catch {
                 print("Failed to load flights: \(error)")
             }
         }
     }
-
-    func scheduleRandomFlightNotification(from flights: [SavedFlightModel]) {
+    
+    func startRepeatingNotification(from flights: [SavedFlightModel]) {
         guard let flight = flights.randomElement() else { return }
-
-        let content = UNMutableNotificationContent()
-        content.title = "\(flight.airline) \(flight.flightNumber)"
+        
+        let title = "\(flight.airline) \(flight.flightNumber)"
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         let dateStr = formatter.string(from: flight.departureDate)
-        content.body = "\(flight.origin) → \(flight.destination) on \(dateStr) - $\(String(format: "%.2f", flight.price))"
+        let body = "\(flight.origin) → \(flight.destination) on \(dateStr) - $\(String(format: "%.2f", flight.price))"
+        let timeInterval = TimeInterval(60)
+        
+        startRepeatingNotification(id: flight.id.uuidString, title: title, body: body, timeInterval: timeInterval)
+    }
+    
+    /// Запуск повторяющегося уведомления
+    func startRepeatingNotification(
+        id: String,
+        title: String,
+        body: String,
+        timeInterval: TimeInterval,
+        repeats: Bool = true
+    ) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
         content.sound = .default
-
-        let request = UNNotificationRequest(
-            identifier: UUID().uuidString,
-            content: content,
-            trigger: UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
+        content.badge = NSNumber(value: 1)
+        
+        let trigger = UNTimeIntervalNotificationTrigger(
+            timeInterval: timeInterval,
+            repeats: repeats
         )
+        
+        let request = UNNotificationRequest(
+            identifier: id,
+            content: content,
+            trigger: trigger
+        )
+        
         UNUserNotificationCenter.current().add(request) { error in
-                if let error = error {
-                    print("Ошибка отправки уведомления: \(error.localizedDescription)")
-                } else {
-                    print("Уведомление успешно")
-                }
+            if let error = error {
+                print("❗ Error scheduling notification:", error.localizedDescription)
+            } else {
+                print("✅ Notification scheduled with id:", id)
             }
-    }
-
-    func startPeriodicNotifications(flights: [SavedFlightModel]) {
-        stopNotifications()
-        guard !flights.isEmpty else { return }
-
-        currentFlights = flights
-        scheduleRandomFlightNotification(from: currentFlights)
-
-        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
-            guard let self = self, self.isEnabled else { return }
-            if self.currentFlights.isEmpty {
-                self.stopNotifications()
-                return
-            }
-            self.scheduleRandomFlightNotification(from: self.currentFlights)
         }
-        RunLoop.main.add(timer!, forMode: .common)
     }
+    
+    // MARK: - Stop Notification
+    
+    /// Остановить конкретное уведомление
+    func stopNotification(id: String) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
+        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [id])
+        
+        print("🛑 Notification stopped:", id)
+    }
+    
+    /// Остановить все уведомления
+    func stopAllNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        
+        print("🛑 All notifications stopped")
+    }
+}
 
-    func stopNotifications() {
-        timer?.invalidate()
-        timer = nil
-        currentFlights = []
+extension NotificationService: UNUserNotificationCenterDelegate {
+    
+    /// Показывать уведомление даже если приложение открыто
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        completionHandler([.banner, .sound, .badge])
     }
 }
