@@ -75,6 +75,7 @@
 		FCC2CDC42F54ADC20019E2C9 /* bsuirApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bsuirApp.swift; sourceTree = "<group>"; };
 		FCC2CDC62F54ADC20019E2C9 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		FCC2CDC82F54ADC20019E2C9 /* bsuir.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = bsuir.xcdatamodel; sourceTree = "<group>"; };
+		FCFC89A02F57537F0017CC5B /* bsuir.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bsuir.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +234,7 @@
 		FCC2CDC72F54ADC20019E2C9 /* bsuir */ = {
 			isa = PBXGroup;
 			children = (
+				FCFC89A02F57537F0017CC5B /* bsuir.entitlements */,
 				FA7A49022F56E60B008039ED /* GoogleService-Info.plist */,
 				FCC2CDC22F54ADC20019E2C9 /* Assets.xcassets */,
 				FCC2CDC32F54ADC20019E2C9 /* bsuir.xcdatamodeld */,
@@ -489,6 +491,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = bsuir/bsuir.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
@@ -521,6 +524,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = bsuir/bsuir.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;

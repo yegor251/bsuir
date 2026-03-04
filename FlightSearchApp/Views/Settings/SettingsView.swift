@@ -13,15 +13,13 @@ struct SettingsView: View {
                     Toggle(localizationService.localizedString("settings_notifications_flight_reminders"), isOn: $notificationService.isEnabled)
                         .onChange(of: notificationService.isEnabled) { _, enabled in
                             if enabled {
-                                notificationService.requestPermission { granted in
-                                    if granted {
-                                        notificationService.loadFlightsAndStart()
-                                    } else {
-                                        notificationService.isEnabled = false
-                                    }
+                                if notificationService.isAuthorized {
+                                    notificationService.loadFlightsAndStart()
+                                } else {
+                                    notificationService.isEnabled = false
                                 }
                             } else {
-                                notificationService.stopNotifications()
+                                notificationService.stopAllNotifications()
                             }
                         }
                     Text(localizationService.localizedString("settings_notifications_flight_reminders_description"))
@@ -67,7 +65,7 @@ struct SettingsView: View {
                 if notificationService.isEnabled {
                     let flights = (try? DatabaseService.shared.fetchSavedFlights()) ?? []
                     if !flights.isEmpty {
-                        notificationService.startPeriodicNotifications(flights: flights)
+                        notificationService.startRepeatingNotification(from: flights)
                     }
                 }
             }
