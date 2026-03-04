@@ -5,9 +5,7 @@ import UserNotifications
 
 final class NotificationService: NSObject, ObservableObject {
     static let shared = NotificationService()
-    
-    // MARK: - Published State
-    
+
     @Published var isEnabled: Bool = false
     @Published private(set) var isAuthorized: Bool = false
     
@@ -17,19 +15,15 @@ final class NotificationService: NSObject, ObservableObject {
         super.init()
         UNUserNotificationCenter.current().delegate = self
         
-        // Проверяем статус при старте
         refreshAuthorizationStatus()
         
-        // Отслеживаем возврат из Settings
         NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
             .sink { [weak self] _ in
                 self?.refreshAuthorizationStatus()
             }
             .store(in: &cancellables)
     }
-    
-    // MARK: - Authorization
-    
+
     func requestAuthorization() {
         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
         
@@ -55,8 +49,6 @@ final class NotificationService: NSObject, ObservableObject {
         }
     }
     
-    // MARK: - Permission
-    
     /// Запрос разрешения на уведомления
     func requestAuthorization(completion: @escaping (Bool) -> Void) {
         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
@@ -81,8 +73,6 @@ final class NotificationService: NSObject, ObservableObject {
         }
     }
     
-    // MARK: - Schedule Repeating Notification
-    
     func loadFlightsAndStart() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
@@ -99,6 +89,8 @@ final class NotificationService: NSObject, ObservableObject {
     
     func startRepeatingNotification(from flights: [SavedFlightModel]) {
         guard let flight = flights.randomElement() else { return }
+        
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         
         let title = "\(flight.airline) \(flight.flightNumber)"
         let formatter = DateFormatter()
@@ -143,8 +135,6 @@ final class NotificationService: NSObject, ObservableObject {
             }
         }
     }
-    
-    // MARK: - Stop Notification
     
     /// Остановить конкретное уведомление
     func stopNotification(id: String) {
