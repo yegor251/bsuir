@@ -54,6 +54,13 @@
 "settings_about" = "About";
 "settings_version" = "Version";
 
+"account_section_title" = "Account";
+"account_signed_in_as" = "Signed in as";
+"account_sign_out" = "Sign out";
+"account_sign_out_hint" = "You can always sign in again later.";
+"account_sign_out_error_title" = "Sign out error";
+"auth_error_ok" = "OK";
+
 "theme_system" = "System";
 "theme_light" = "Light";
 "theme_dark" = "Dark";

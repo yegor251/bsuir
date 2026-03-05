@@ -55,6 +55,13 @@
 "settings_about" = "О приложении";
 "settings_version" = "Версия";
 
+"account_section_title" = "Аккаунт";
+"account_signed_in_as" = "Вы вошли как";
+"account_sign_out" = "Выйти";
+"account_sign_out_hint" = "Вы всегда сможете войти снова.";
+"account_sign_out_error_title" = "Ошибка выхода";
+"auth_error_ok" = "ОК";
+
 "theme_system" = "Системная";
 "theme_light" = "Светлая";
 "theme_dark" = "Тёмная";

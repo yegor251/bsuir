@@ -1,10 +1,15 @@
 import SwiftUI
+import FirebaseAuth
 
 struct SettingsView: View {
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
     @EnvironmentObject private var localizationService: LocalizationService
     @EnvironmentObject private var themeService: ThemeService
+    @EnvironmentObject private var authService: AuthService
     @ObservedObject private var notificationService = NotificationService.shared
+    
+    @State private var signOutErrorMessage: String?
+    @State private var showSignOutErrorAlert = false
 
     var body: some View {
         NavigationStack {
@@ -59,6 +64,34 @@ struct SettingsView: View {
                             .foregroundColor(.secondary)
                     }
                 }
+                
+                Section(header: Text(localizationService.localizedString("account_section_title"))) {
+                    if let email = authService.user?.email, !email.isEmpty {
+                        HStack {
+                            Text(localizationService.localizedString("account_signed_in_as"))
+                            Spacer()
+                            Text(email)
+                                .foregroundColor(.secondary)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.8)
+                        }
+                    }
+                    
+                    Button(role: .destructive) {
+                        do {
+                            try authService.signOut()
+                        } catch {
+                            signOutErrorMessage = error.localizedDescription
+                            showSignOutErrorAlert = true
+                        }
+                    } label: {
+                        Text(localizationService.localizedString("account_sign_out"))
+                    }
+                    
+                    Text(localizationService.localizedString("account_sign_out_hint"))
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
             }
             .navigationTitle(localizationService.localizedString("settings_title"))
             .onAppear {
@@ -68,6 +101,11 @@ struct SettingsView: View {
                         notificationService.startRepeatingNotification(from: flights)
                     }
                 }
+            }
+            .alert(localizationService.localizedString("account_sign_out_error_title"), isPresented: $showSignOutErrorAlert) {
+                Button(localizationService.localizedString("auth_error_ok"), role: .cancel) {}
+            } message: {
+                Text(signOutErrorMessage ?? localizationService.localizedString("error_generic"))
             }
         }
     }
