@@ -66,16 +66,22 @@ struct FlightDetailsView: View {
         .navigationTitle(localizationService.localizedString("details_title"))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    viewModel.toggleSaved()
-                } label: {
-                    Image(systemName: viewModel.isSaved ? "bookmark.fill" : "bookmark")
+                HStack(spacing: 16) {
+                    Button {
+                        shareTitleAndNotes()
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                    Button {
+                        viewModel.toggleSaved()
+                    } label: {
+                        Image(systemName: viewModel.isSaved ? "bookmark.fill" : "bookmark")
+                    }
                 }
             }
         }
         .sheet(isPresented: $sharing) {
-            let shareText = "\(viewModel.flight.airline) \(viewModel.flight.flightNumber) \(viewModel.flight.origin) → \(viewModel.flight.destination)"
-            ActivityView(activityItems: [shareText])
+            ActivityView(activityItems: [shareTitleAndNotesText])
         }
         .sheet(isPresented: $showCamera) {
             CameraImagePicker(image: .constant(nil)) { image in
@@ -84,6 +90,17 @@ struct FlightDetailsView: View {
                 }
             }
         }
+    }
+
+    /// Текст для шаринга: title + пробел + notes.
+    private var shareTitleAndNotesText: String {
+        [viewModel.title, viewModel.notes]
+            .filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+            .joined(separator: " ")
+    }
+
+    private func shareTitleAndNotes() {
+        sharing = true
     }
 
     private var photoSection: some View {
