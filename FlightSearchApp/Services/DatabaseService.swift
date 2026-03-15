@@ -6,6 +6,7 @@ protocol DatabaseServiceProtocol {
     func fetchSavedFlights() throws -> [SavedFlightModel]
     func deleteFlight(id: UUID) throws
     func updateSavedFlight(id: UUID, notes: String?, title: String?, notes2: String?) throws
+    func updateSavedFlightPhoto(id: UUID, photoPath: String?) throws
 }
 
 final class DatabaseService: DatabaseServiceProtocol {
@@ -75,6 +76,15 @@ final class DatabaseService: DatabaseServiceProtocol {
             entity.setValue(notes, forKey: "notes")
             entity.setValue(title, forKey: "title")
             entity.setValue(notes2, forKey: "notes2")
+            try context.save()
+        }
+    }
+
+    func updateSavedFlightPhoto(id: UUID, photoPath: String?) throws {
+        let request = NSFetchRequest<NSManagedObject>(entityName: "SavedFlight")
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        if let entity = try context.fetch(request).first {
+            entity.setValue(photoPath, forKey: "photoPath")
             try context.save()
         }
     }

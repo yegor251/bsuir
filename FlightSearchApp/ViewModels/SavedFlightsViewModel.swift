@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 import SwiftUI
+import UIKit
 import FirebaseFirestore
 
 enum SavedFlightsSortOption: String, CaseIterable {
@@ -195,6 +196,7 @@ final class SavedFlightsViewModel: ObservableObject {
                     let notes = data["notes"] as? String
                     let title = data["title"] as? String
                     let notes2 = data["notes2"] as? String
+                    let photoPath = existing?.photoPath
 
                     return SavedFlightModel(
                         id: uuid,
@@ -208,7 +210,8 @@ final class SavedFlightsViewModel: ObservableObject {
                         savedDate: savedDate,
                         notes: notes,
                         title: title,
-                        notes2: notes2
+                        notes2: notes2,
+                        photoPath: photoPath
                     )
                 }
 
@@ -245,8 +248,64 @@ final class SavedFlightsViewModel: ObservableObject {
         let toDelete = offsets.map { filteredFlights[$0] }
         for flight in toDelete {
             try? databaseService.deleteFlight(id: flight.id)
+            if let path = flight.photoPath { removePhotoFile(at: path) }
         }
         flights.removeAll { toDelete.contains($0) }
         filterFlights()
+    }
+
+    @discardableResult
+    func addPhoto(to flightId: UUID, image: UIImage) -> String? {
+        guard let path = saveImageToDocuments(image, flightId: flightId) else { return nil }
+        do {
+            try databaseService.updateSavedFlightPhoto(id: flightId, photoPath: path)
+            if let index = flights.firstIndex(where: { $0.id == flightId }) {
+                let flight = flights[index]
+                flights[index] = SavedFlightModel(
+                    id: flight.id,
+                    flightNumber: flight.flightNumber,
+                    airline: flight.airline,
+                    origin: flight.origin,
+                    destination: flight.destination,
+                    departureDate: flight.departureDate,
+                    arrivalDate: flight.arrivalDate,
+                    price: flight.price,
+                    savedDate: flight.savedDate,
+                    notes: flight.notes,
+                    title: flight.title,
+                    notes2: flight.notes2,
+                    photoPath: path
+                )
+                filterFlights()
+            }
+            return path
+        } catch {
+            errorMessage = error.localizedDescription
+            try? FileManager.default.removeItem(atPath: path)
+            return nil
+        }
+    }
+
+    private static var savedFlightPhotosDirectory: URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("SavedFlightPhotos", isDirectory: true)
+    }
+
+    private func saveImageToDocuments(_ image: UIImage, flightId: UUID) -> String? {
+        let dir = Self.savedFlightPhotosDirectory
+        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        let filename = "\(flightId.uuidString).jpg"
+        let fileURL = dir.appendingPathComponent(filename)
+        guard let data = image.jpegData(compressionQuality: 0.8) else { return nil }
+        do {
+            try data.write(to: fileURL)
+            return fileURL.path
+        } catch {
+            return nil
+        }
+    }
+
+    private func removePhotoFile(at path: String) {
+        try? FileManager.default.removeItem(atPath: path)
     }
 }

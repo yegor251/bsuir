@@ -1,10 +1,16 @@
 import SwiftUI
+import UIKit
 
 struct FlightDetailsView: View {
     @EnvironmentObject private var localizationService: LocalizationService
     @StateObject private var viewModel: FlightDetailsViewModel
-        
-    init(flight: Flight, isSaved: Bool = false, notes: String = "", title: String = "", notes2: String = "") {
+
+    /// Путь к фото рейса (для сохранённых). Если передан, показывается секция «Фото» и кнопка «Сделать фото».
+    var photoPath: String? = nil
+    /// Вызывается после съёмки фото. Возвращает путь к сохранённому файлу или nil.
+    var onAddPhoto: ((UIImage) -> String?)? = nil
+
+    init(flight: Flight, isSaved: Bool = false, notes: String = "", title: String = "", notes2: String = "", photoPath: String? = nil, onAddPhoto: ((UIImage) -> String?)? = nil) {
         _viewModel = StateObject(wrappedValue: FlightDetailsViewModel(
             flight: flight,
             isSaved: isSaved,
@@ -12,10 +18,14 @@ struct FlightDetailsView: View {
             title: title,
             notes2: notes2
         ))
+        self.photoPath = photoPath
+        self.onAddPhoto = onAddPhoto
     }
 
     @State private var sharing: Bool = false
     @State private var weatherViewId = UUID()
+    @State private var displayedPhotoPath: String? = nil
+    @State private var showCamera = false
 
     var body: some View {
         ScrollView {
@@ -29,15 +39,22 @@ struct FlightDetailsView: View {
                     .id(weatherViewId)
                 notesSection
                 notes2Section
+                if viewModel.isSaved, onAddPhoto != nil {
+                    photoSection
+                }
                 Spacer(minLength: 16)
             }
             .padding()
         }
         .onAppear {
             print("FlightDetailsView onAppear, flight destination=\(viewModel.flight.destination)")
+            displayedPhotoPath = photoPath
             Task {
                 await viewModel.loadWeather()
             }
+        }
+        .onChange(of: photoPath) { _, new in
+            displayedPhotoPath = new
         }
         .onChange(of: viewModel.temperature) { oldValue, newValue in
             print("FlightDetailsView weatherSection reload, old=\(String(describing: oldValue)), new=\(String(describing: newValue))")
@@ -60,6 +77,40 @@ struct FlightDetailsView: View {
             let shareText = "\(viewModel.flight.airline) \(viewModel.flight.flightNumber) \(viewModel.flight.origin) → \(viewModel.flight.destination)"
             ActivityView(activityItems: [shareText])
         }
+        .sheet(isPresented: $showCamera) {
+            CameraImagePicker(image: .constant(nil)) { image in
+                if let image = image, let add = onAddPhoto, let path = add(image) {
+                    displayedPhotoPath = path
+                }
+            }
+        }
+    }
+
+    private var photoSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(localizationService.localizedString("photo_title"))
+                .font(.headline)
+            let pathToShow = displayedPhotoPath ?? photoPath
+            if let path = pathToShow, FileManager.default.fileExists(atPath: path),
+               let uiImage = UIImage(contentsOfFile: path) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxHeight: 240)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+            Button {
+                showCamera = true
+            } label: {
+                Label(localizationService.localizedString("photo_add_button"), systemImage: "camera.fill")
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .padding()
+        .background(.thinMaterial)
+        .cornerRadius(12)
     }
 
     private var header: some View {
@@ -270,6 +321,46 @@ struct ActivityView: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
+}
+
+/// Открывает камеру устройства; по завершении вызывает `onFinish` с полученным изображением или nil при отмене.
+struct CameraImagePicker: UIViewControllerRepresentable {
+    @Binding var image: UIImage?
+    var onFinish: (UIImage?) -> Void
+
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.delegate = context.coordinator
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(onFinish: onFinish)
+    }
+
+    final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+        let onFinish: (UIImage?) -> Void
+
+        init(onFinish: @escaping (UIImage?) -> Void) {
+            self.onFinish = onFinish
+        }
+
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+            let img = info[.originalImage] as? UIImage
+            picker.dismiss(animated: true) { [onFinish] in
+                onFinish(img)
+            }
+        }
+
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            picker.dismiss(animated: true) { [onFinish] in
+                onFinish(nil)
+            }
+        }
+    }
 }
 
 #Preview {

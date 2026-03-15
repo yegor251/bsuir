@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct SavedFlightsView: View {
     @EnvironmentObject private var localizationService: LocalizationService
@@ -51,7 +52,9 @@ struct SavedFlightsView: View {
                                     isSaved: true,
                                     notes: flight.notes ?? "",
                                     title: flight.title ?? "",
-                                    notes2: flight.notes2 ?? ""
+                                    notes2: flight.notes2 ?? "",
+                                    photoPath: flight.photoPath,
+                                    onAddPhoto: { image in viewModel.addPhoto(to: flight.id, image: image) }
                                 )
                             } label: {
                                 SavedFlightRowView(flight: flight)
@@ -98,19 +101,29 @@ struct SavedFlightRowView: View {
     let flight: SavedFlightModel
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            HStack {
-                Text(displayTitle)
-                    .font(.headline)
-                Spacer()
-                Text(priceString)
-                    .font(.subheadline)
+        HStack(alignment: .top, spacing: 12) {
+            if let path = flight.photoPath, FileManager.default.fileExists(atPath: path),
+               let uiImage = UIImage(contentsOfFile: path) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 44, height: 44)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
             }
-            Text("\(flight.origin) → \(flight.destination)")
-                .font(.subheadline)
-            Text(savedDateString)
-                .font(.caption)
-                .foregroundColor(.secondary)
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text(displayTitle)
+                        .font(.headline)
+                    Spacer()
+                    Text(priceString)
+                        .font(.subheadline)
+                }
+                Text("\(flight.origin) → \(flight.destination)")
+                    .font(.subheadline)
+                Text(savedDateString)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
         }
         .padding(.vertical, 4)
     }

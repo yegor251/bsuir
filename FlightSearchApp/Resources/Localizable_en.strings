@@ -27,6 +27,8 @@
 "title_label" = "Name";
 "title_placeholder" = "Name (optional)";
 "notes2_title" = "Notes 2";
+"photo_title" = "Photo";
+"photo_add_button" = "Take photo";
 
 "weather_title" = "Weather";
 "weather_offline_unavailable" = "Weather unavailable offline";

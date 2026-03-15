@@ -14,6 +14,7 @@ struct SavedFlightModel: Identifiable, Hashable {
     var notes: String?
     var title: String?
     var notes2: String?
+    var photoPath: String?
 
     init(
         id: UUID,
@@ -27,7 +28,8 @@ struct SavedFlightModel: Identifiable, Hashable {
         savedDate: Date,
         notes: String? = nil,
         title: String? = nil,
-        notes2: String? = nil
+        notes2: String? = nil,
+        photoPath: String? = nil
     ) {
         self.id = id
         self.flightNumber = flightNumber
@@ -41,6 +43,7 @@ struct SavedFlightModel: Identifiable, Hashable {
         self.notes = notes
         self.title = title
         self.notes2 = notes2
+        self.photoPath = photoPath
     }
 
     init?(entity: NSManagedObject) {
@@ -70,6 +73,7 @@ struct SavedFlightModel: Identifiable, Hashable {
         self.notes = entity.value(forKey: "notes") as? String
         self.title = entity.value(forKey: "title") as? String
         self.notes2 = entity.value(forKey: "notes2") as? String
+        self.photoPath = entity.value(forKey: "photoPath") as? String
     }
 }
 

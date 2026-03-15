@@ -27,6 +27,8 @@
 "title_label" = "Название";
 "title_placeholder" = "Название (по желанию)";
 "notes2_title" = "Заметки 2";
+"photo_title" = "Фото";
+"photo_add_button" = "Сделать фото";
 
 "weather_title" = "Погода";
 "weather_offline_unavailable" = "Погода недоступна офлайн";
